@@ -1,0 +1,46 @@
+{
+    "quizzes": {
+      "quiz1": {
+        "startDate": "2024-02-01T00:00:00Z",
+        "endDate": "2024-02-08T23:59:59Z",
+        "title": "Weekly Quiz on Flutter",
+        "questions": {
+          "question1": {
+            "questionText": "What is Flutter?",
+            "options": [
+              "A programming language",
+              "An operating system",
+              "An open-source UI software development kit",
+              "A type of bird"
+            ],
+            "answerIndex": 2,
+            "pointsAwarded": 10
+          },
+          "question2": {
+            "questionText": "Who created Flutter?",
+            "options": [
+              "Facebook",
+              "Google",
+              "Microsoft",
+              "Apple"
+            ],
+            "answerIndex": 1,
+            "pointsAwarded": 10
+          }
+        }
+      }
+    },
+    "quizParticipations": {
+      "user1": {
+        "quiz1": {
+          "score": 0.75,
+          "totalPointsAwarded": 15,
+          "questionsAnswered": {
+            "question1": 2,
+            "question2": 1
+          }
+        }
+      }
+    }
+  }
+  
