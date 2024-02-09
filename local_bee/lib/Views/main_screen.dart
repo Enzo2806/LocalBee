@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:local_bee/Views/quiz_view/quiz_view.dart';
+import 'package:local_bee/Views/shop_view/shop_view.dart';
+
 // Import your view screens
 // import 'search_store_view.dart';
 // import 'profile_view.dart';
@@ -14,12 +16,12 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0; // Default index of the first screen
+  int _selectedIndex = 1; // Default index of the first screen
 
   // List of widgets to call on tab tap.
   final List<Widget> _widgetOptions = [
     QuizView(), // Placeholder for QuizView()
-    const Text('Search Store'), // Placeholder for SearchStoreView()
+    LocalShopView(), // Placeholder for SearchStoreView()
     const Text('Profile'), // Placeholder for ProfileView()
     const Text('Settings'), // Placeholder for SettingsView()
   ];

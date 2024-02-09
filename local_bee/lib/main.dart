@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:local_bee/Views/main_screen.dart';
+import 'package:local_bee/Model/constants.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +14,9 @@ Future main() async {
 
   // Reset the firebaseauth
   // await FirebaseAuth.instance.signOut();
+
+  // Create localShops
+  // AppConstants().createSampleShops();
 
   runApp(MyApp());
 }

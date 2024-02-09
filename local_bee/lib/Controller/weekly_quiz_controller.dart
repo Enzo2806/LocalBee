@@ -8,6 +8,11 @@ class WeeklyQuizController {
   final String firebaseDatabaseURL = dotenv.env['FIREBASE_DATABASE_URL']!;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  /* 
+  * This method fetches the available quiz for the current week
+  * by sending a GET request to the Firebase Realtime Database
+  * to fetch the list of quizzes and find the one that is currently active.
+  */
   Future<WeeklyQuiz?> getAvailableQuiz() async {
     // Construct the URL for the quizzes endpoint
     final url = Uri.https(firebaseDatabaseURL, 'quizzes.json');
