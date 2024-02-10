@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:local_bee/Views/quiz_view/quiz_view.dart';
+import 'package:local_bee/Views/settings_view/settings_view.dart';
 import 'package:local_bee/Views/shop_view/shop_view.dart';
+import 'package:local_bee/Views/user_view/user_view.dart';
 
 // Import your view screens
 // import 'search_store_view.dart';
@@ -22,8 +24,8 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _widgetOptions = [
     QuizView(), // Placeholder for QuizView()
     LocalShopView(), // Placeholder for SearchStoreView()
-    const Text('Profile'), // Placeholder for ProfileView()
-    const Text('Settings'), // Placeholder for SettingsView()
+    ProfileView(), // Placeholder for ProfileView()
+    SettingsView(), // Placeholder for SettingsView()
   ];
 
   void _onItemTapped(int index) {

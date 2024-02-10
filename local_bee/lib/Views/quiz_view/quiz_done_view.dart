@@ -16,13 +16,14 @@ class QuizDoneView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 20.0),
             // Score display
             Container(
-              padding: EdgeInsets.all(24.0),
+              padding: EdgeInsets.all(20.0),
               decoration: BoxDecoration(
                 color:
                     Colors.green[600], // Adjust the color to match the design
@@ -88,7 +89,7 @@ class QuizDoneView extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 32.0),
+            const SizedBox(height: 20.0),
             // Place text on the left
             Container(
               alignment: Alignment.centerLeft,
@@ -120,7 +121,6 @@ class QuizDoneView extends StatelessWidget {
             WhiteGreenButton(
                 text: "Done",
                 onPressed: () {
-                  // Push the MainScreen to the top of the navigation stack
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => MainScreen()),

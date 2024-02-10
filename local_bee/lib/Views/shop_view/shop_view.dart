@@ -4,6 +4,7 @@ import 'package:local_bee/Views/shop_view/shop_card_view.dart';
 import 'package:local_bee/Controller/local_shop_controller.dart';
 import 'package:local_bee/Views/ViewData/show_error_dialog.dart';
 import 'package:local_bee/Views/ViewData/search_bar.dart';
+import 'package:local_bee/Views/shop_view/shop_detail_view.dart';
 
 class LocalShopView extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class LocalShopView extends StatefulWidget {
 }
 
 class _LocalShopViewState extends State<LocalShopView> {
-  String filterType = 'All'; // Could be 'All', 'Café', 'Restaurant', 'Boutique'
+  String filterType = 'All';
   String searchQuery = '';
   final LocalShopController _controller = LocalShopController();
   Map<String, List<LocalShop>> _groupedLocalShops = {};
@@ -36,10 +37,49 @@ class _LocalShopViewState extends State<LocalShopView> {
     }
   }
 
+  void _showFilterDialog() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Wrap(
+            children: <String>['All', 'Café', 'Restaurant', 'Boutique']
+                .map((String filter) {
+              return ListTile(
+                  leading: Icon(
+                    Icons.filter_list,
+                    color: filterType == filter ? Colors.blue : null,
+                  ),
+                  title: Text(filter),
+                  onTap: () {
+                    setState(() {
+                      filterType = filter;
+                    });
+                    Navigator.pop(context);
+                  });
+            }).toList(),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> buildShopList() {
-      if (searchQuery.isEmpty) {
+      // If there is a search query, flatten all lists into one and filter
+      List<LocalShop> filteredShops = [];
+
+      // If search query is not empty, filter by search query; otherwise, use filterType
+      if (searchQuery.isNotEmpty) {
+        filteredShops = _groupedLocalShops.values
+            .expand((shops) => shops)
+            .where((shop) =>
+                shop.name.toLowerCase().contains(searchQuery.toLowerCase()))
+            .toList();
+      } else if (filterType != 'All') {
+        filteredShops = _groupedLocalShops[filterType] ?? [];
+      } else {
         return _groupedLocalShops.entries.map((entry) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,9 +101,21 @@ class _LocalShopViewState extends State<LocalShopView> {
                   scrollDirection: Axis.horizontal,
                   itemCount: entry.value.length,
                   itemBuilder: (context, index) {
+                    LocalShop shop = entry.value[index];
                     return Padding(
                       padding: const EdgeInsets.only(left: 16.0),
-                      child: LocalCardView(localShop: entry.value[index]),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ShopDetailView(localShop: shop),
+                            ),
+                          );
+                        },
+                        child: LocalCardView(localShop: shop),
+                      ),
                     );
                   },
                 ),
@@ -71,19 +123,10 @@ class _LocalShopViewState extends State<LocalShopView> {
             ],
           );
         }).toList();
-      } else {
-        // If there is a search query, flatten all lists into one and filter
-        var allShops =
-            _groupedLocalShops.values.expand((shops) => shops).toList();
-        var filteredShops = allShops
-            .where((shop) =>
-                shop.name.toLowerCase().contains(searchQuery.toLowerCase()))
-            .toList();
-
-        return [
-          for (var shop in filteredShops) LocalCardView(localShop: shop),
-        ];
       }
+      return [
+        for (var shop in filteredShops) LocalCardView(localShop: shop),
+      ];
     }
 
     return Scaffold(
@@ -93,7 +136,7 @@ class _LocalShopViewState extends State<LocalShopView> {
           IconButton(
             icon: const Icon(Icons.filter_list),
             onPressed: () {
-              // TODO: Open filter dialog or menu
+              _showFilterDialog();
             },
           ),
         ],

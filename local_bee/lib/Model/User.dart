@@ -5,6 +5,7 @@ class UserProfile {
   String familyName;
   String email;
   String preferredLanguage;
+  int points;
 
   UserProfile({
     required this.userId,
@@ -12,6 +13,7 @@ class UserProfile {
     required this.familyName,
     required this.email,
     required this.preferredLanguage,
+    this.points = 0,
   });
 
   // Method to convert UserProfile to Map for Firestore
@@ -22,6 +24,7 @@ class UserProfile {
       'familyName': familyName,
       'email': email,
       'preferredLanguage': preferredLanguage,
+      'points': points,
     };
   }
 
@@ -33,6 +36,7 @@ class UserProfile {
       familyName: map['familyName'],
       email: map['email'],
       preferredLanguage: map['preferredLanguage'],
+      points: map['points'],
     );
   }
 }

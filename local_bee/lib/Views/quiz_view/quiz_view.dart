@@ -30,11 +30,11 @@ class _QuizViewState extends State<QuizView> {
   void _checkForAvailableQuiz() async {
     // Get the available quiz for the current week
     WeeklyQuiz? availableQuiz = await quizController.getAvailableQuiz();
-
+    print(availableQuiz);
     if (availableQuiz != null) {
       // Check if the user has already completed the quiz
-      bool hasCompleted =
-          await participationController.hasUserCompletedQuiz(availableQuiz.id);
+      bool hasCompleted = await participationController
+          .hasUserCompletedQuiz(availableQuiz.name);
 
       setState(() {
         isQuizAvailable = !hasCompleted;
@@ -81,7 +81,7 @@ class _QuizViewState extends State<QuizView> {
                           builder: (context) => InProgressQuizView(
                             quiz: quiz!,
                             quizParticipation: QuizParticipation(
-                              quizId: quiz!.id,
+                              quizId: quiz!.name,
                               userId: FirebaseAuth.instance.currentUser!.uid,
                             ),
                           ),

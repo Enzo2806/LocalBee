@@ -39,6 +39,7 @@ class QuizParticipationController {
   /*
   * This method saves the user's quiz participation to the Firebase Realtime Database
   * by sending a PUT request with the quiz participation data.
+  * It also adds the points to the user profile.
   */
   Future<void> saveQuizParticipation(
       QuizParticipation quizParticipation) async {
@@ -61,6 +62,8 @@ class QuizParticipationController {
         body: json.encode(participationData),
       );
 
+      // Add points to user account
+
       if (response.statusCode != 200) {
         throw Exception('Failed to save quiz participation.');
       }
@@ -71,6 +74,10 @@ class QuizParticipationController {
     }
   }
 
+  /*
+  * This method fetches the user's quiz participations from the Firebase Realtime Database
+  * by sending a GET request to the user's quizParticipations node.
+  */
   Future<List<QuizParticipation>> fetchUserParticipations() async {
     final User? user = _auth.currentUser;
     if (user == null) throw Exception('User is not signed in.');

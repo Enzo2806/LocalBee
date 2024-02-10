@@ -1,24 +1,18 @@
+// ignore_for_file: file_names
+
 class Offer {
   String productName;
-  bool isDiscount;
-  double?
-      discount; // Nullable because it might not be applicable for a fixed price offer
-  double?
+  double
       price; // Nullable because it might not be applicable for a discount offer
 
   Offer({
     required this.productName,
-    this.isDiscount =
-        true, // default to true, assuming most offers are discounts
-    this.discount,
-    this.price,
+    required this.price,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'productName': productName,
-      'isDiscount': isDiscount,
-      'discount': discount,
       'price': price,
     };
   }
@@ -26,8 +20,6 @@ class Offer {
   factory Offer.fromMap(Map<String, dynamic> map) {
     return Offer(
       productName: map['productName'],
-      isDiscount: map.containsKey('discount'),
-      discount: map['discount'],
       price: map['price'],
     );
   }

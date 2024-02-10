@@ -1,5 +1,5 @@
 import 'package:local_bee/model/Address.dart';
-import 'package:local_bee/model/Offer.dart';
+import 'package:local_bee/Model/Offer.dart';
 
 class LocalShop {
   String name;
@@ -9,6 +9,7 @@ class LocalShop {
   double rating;
   List<Offer> offers;
   String imageUrl;
+  String webSite;
 
   LocalShop({
     required this.name,
@@ -17,6 +18,7 @@ class LocalShop {
     required this.rating,
     required this.offers,
     required this.imageUrl,
+    required this.webSite,
   });
 
 // Converts a LocalShop instance into a Map.
@@ -27,8 +29,9 @@ class LocalShop {
       'serviceType': serviceType,
       'rating': rating,
       // Handles the case where 'offers' might be null
-      'offers': offers?.map((offer) => offer.toMap()).toList() ?? [],
+      'offers': offers.map((offer) => offer.toMap()).toList() ?? [],
       'imageUrl': imageUrl,
+      'webSite': webSite,
     };
   }
 
@@ -46,6 +49,7 @@ class LocalShop {
           .toDouble(), // Make sure to handle conversion if necessary
       offers: offersList,
       imageUrl: map['imageUrl'],
+      webSite: map['webSite'],
     );
   }
 }

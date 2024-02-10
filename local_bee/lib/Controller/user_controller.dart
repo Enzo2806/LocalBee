@@ -138,4 +138,35 @@ class UserController {
       throw Exception(e.message); // Provide a user-friendly error message
     }
   }
+
+  // Function to get User object from Firebase Realtime Database
+  Future<UserProfile?> getUserProfile() async {
+    final User? currentUser = _auth.currentUser;
+
+    // Check if the user is not logged in
+    if (currentUser == null) {
+      print('No user is currently logged in.');
+      return null;
+    }
+
+    final url = Uri.https(firebaseDatabaseURL, 'users/${currentUser.uid}.json');
+
+    try {
+      // Fetch user data from Firebase Realtime Database using the UID
+      final response = await http.get(url);
+
+      if (response.statusCode == 200 && response.body != 'null') {
+        // Parse the user data and return the User object
+        Map<String, dynamic> userData = json.decode(response.body);
+        return UserProfile.fromMap(userData[userData.keys.first]);
+      } else {
+        print('Failed to fetch user data');
+        return null;
+      }
+    } catch (e) {
+      // Handle errors here
+      print('Error retrieving user: $e');
+      return null;
+    }
+  }
 }

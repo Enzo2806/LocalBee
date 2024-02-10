@@ -1,13 +1,13 @@
 import 'Question.dart';
 
 class WeeklyQuiz {
-  String id;
+  String name;
   DateTime startDate;
   DateTime endDate;
   List<Question> questions;
 
   WeeklyQuiz({
-    required this.id,
+    required this.name,
     required this.startDate,
     required this.endDate,
     required this.questions,
@@ -16,7 +16,7 @@ class WeeklyQuiz {
   // Convert the WeeklyQuiz object to a map
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'name': name,
       'startDate': startDate.toIso8601String(),
       'endDate': endDate.toIso8601String(),
       'questions': questions.map((question) => question.toMap()).toList(),
@@ -24,20 +24,13 @@ class WeeklyQuiz {
   }
 
   // Factory method to create a WeeklyQuiz from a map
-  factory WeeklyQuiz.fromMap(Map<String, dynamic> map, String id) {
-    // The questions are contained in a nested map,
-    // so we first access the values of the nested map, and then we map each one to a Question object.
-    List<Question> questions = (map['questions'] as Map<String, dynamic>)
-        .values
-        .map<Question>((questionMap) {
-      return Question.fromMap(questionMap as Map<String, dynamic>);
-    }).toList();
-
+  factory WeeklyQuiz.fromMap(Map<String, dynamic> map) {
     return WeeklyQuiz(
-      id: id,
-      startDate: DateTime.parse(map['startDate']),
-      endDate: DateTime.parse(map['endDate']),
-      questions: questions,
-    );
+        name: map['name'],
+        startDate: DateTime.parse(map['startDate']),
+        endDate: DateTime.parse(map['endDate']),
+        questions: List<Question>.from(
+          map['questions'].map((question) => Question.fromMap(question)),
+        ));
   }
 }

@@ -18,6 +18,9 @@ Future main() async {
   // Create localShops
   // AppConstants().createSampleShops();
 
+  // Create Quizzes
+  // AppConstants().createSampleQuizzes();
+
   runApp(MyApp());
 }
 

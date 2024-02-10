@@ -6,7 +6,6 @@ import 'package:local_bee/Model/WeeklyQuiz.dart';
 
 class WeeklyQuizController {
   final String firebaseDatabaseURL = dotenv.env['FIREBASE_DATABASE_URL']!;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   /* 
   * This method fetches the available quiz for the current week
@@ -29,7 +28,7 @@ class WeeklyQuizController {
           final startDate = DateTime.parse(quizData['startDate']).toLocal();
           final endDate = DateTime.parse(quizData['endDate']).toLocal();
           if (now.isAfter(startDate) && now.isBefore(endDate)) {
-            return WeeklyQuiz.fromMap(quizData, quizId);
+            return WeeklyQuiz.fromMap(quizData);
           }
         }
       } else {
@@ -40,5 +39,26 @@ class WeeklyQuizController {
       // Handle exceptions by returning null or rethrowing the exception
     }
     return null;
+  }
+
+  /* This method is to save a given quiz
+  * to the Firebase Realtime Database
+  */
+  Future<void> saveQuiz(WeeklyQuiz quiz) async {
+    // Construct the URL for the quizzes endpoint
+    final url = Uri.https(firebaseDatabaseURL, 'quizzes.json');
+    try {
+      // Send a POST request to save the quiz
+      final response = await http.post(
+        url,
+        body: json.encode(quiz.toMap()),
+      );
+      if (response.statusCode != 200) {
+        throw Exception('Failed to save quiz to the database');
+      }
+    } catch (e) {
+      print(e);
+      // Handle exceptions by returning null or rethrowing the exception
+    }
   }
 }
