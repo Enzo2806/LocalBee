@@ -10,6 +10,11 @@ LocalBee is a Flutter-based mobile application designed to promote local busines
 - **Interactive Map:** View shops in your vicinity through an integrated map.
 - **User Profiles:** Track your points, spending, and quiz participation.
 
+![Quiz](https://github.com/Enzo2806/LocalBee/assets/72216366/6f7906fa-4e60-4b55-935c-9d14e3b8cafc)
+![LocalShops](https://github.com/Enzo2806/LocalBee/assets/72216366/818f7074-cc67-4c87-b36d-fe1fc07c3921)
+![Register](https://github.com/Enzo2806/LocalBee/assets/72216366/251b0ba0-c163-40d5-9405-46701234e7cc)
+
+
 ## Getting Started
 
 ### Prerequisites
