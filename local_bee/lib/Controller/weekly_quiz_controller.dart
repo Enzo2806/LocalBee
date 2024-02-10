@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:local_bee/Controller/quiz_participation_controller.dart';
 import 'package:local_bee/Model/WeeklyQuiz.dart';
 
 class WeeklyQuizController {
@@ -27,7 +28,11 @@ class WeeklyQuizController {
           final quizData = quizzesData[quizId];
           final startDate = DateTime.parse(quizData['startDate']).toLocal();
           final endDate = DateTime.parse(quizData['endDate']).toLocal();
-          if (now.isAfter(startDate) && now.isBefore(endDate)) {
+          final participated = await QuizParticipationController()
+              .hasUserCompletedQuiz(quizData['name']);
+          if (now.isAfter(startDate) &&
+              now.isBefore(endDate) &&
+              !participated) {
             return WeeklyQuiz.fromMap(quizData);
           }
         }

@@ -3,6 +3,8 @@ import 'package:local_bee/Controller/user_controller.dart';
 import 'package:local_bee/Model/User.dart';
 
 class ProfileView extends StatefulWidget {
+  const ProfileView({super.key});
+
   @override
   _ProfileViewState createState() => _ProfileViewState();
 }
@@ -99,7 +101,7 @@ class _ProfileViewState extends State<ProfileView> {
                     color: Colors.white70,
                   ),
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Text(
                   "${_user!.name} ${_user!.familyName}",
                   style: const TextStyle(
@@ -130,7 +132,7 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                 ),
                 Text(
-                  "Win points by correclty answering weekly quizzes or by scanning your card after purchasing any item at in any Montreal local store! ",
+                  "Win points by correclty answering weekly quizzes or by scanning your card after purchasing any item in any Montreal local store! ",
                 ),
                 SizedBox(height: 10.0),
                 Text(
@@ -157,19 +159,21 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             subtitle: Column(
               children: <Widget>[
-                ActivityTile(
-                  icon: Icons.quiz,
-                  text: "You earned 20 points",
-                  amount: "+20",
-                  color: Colors.green,
-                ),
-                Divider(),
-                ActivityTile(
-                  icon: Icons.store,
-                  text: "You earned 123 points",
-                  amount: "+123",
-                  color: Colors.green,
-                ),
+                Text("No recent activity",
+                    style: TextStyle(color: Colors.grey)),
+                // ActivityTile(
+                //   icon: Icons.quiz,
+                //   text: "You earned 20 points",
+                //   amount: "+20",
+                //   color: Colors.green,
+                // ),
+                // Divider(),
+                // ActivityTile(
+                //   icon: Icons.store,
+                //   text: "You earned 123 points",
+                //   amount: "+123",
+                //   color: Colors.green,
+                // ),
               ],
             ),
           ),

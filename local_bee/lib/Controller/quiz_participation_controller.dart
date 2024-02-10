@@ -13,12 +13,12 @@ class QuizParticipationController {
   * by sending a GET request to the Firebase Realtime Database
   * to check if the user has a participation record for the quiz.
   */
-  Future<bool> hasUserCompletedQuiz(String quizId) async {
+  Future<bool> hasUserCompletedQuiz(String quizName) async {
     final User? user = _auth.currentUser;
     if (user == null) return false;
 
     final url = Uri.https(
-        firebaseDatabaseURL, 'quizParticipations/${user.uid}/$quizId.json');
+        firebaseDatabaseURL, 'quizParticipations/${user.uid}/$quizName.json');
 
     try {
       // Send a GET request to check the user's participation

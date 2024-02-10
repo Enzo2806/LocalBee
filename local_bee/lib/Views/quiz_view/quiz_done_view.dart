@@ -121,7 +121,7 @@ class QuizDoneView extends StatelessWidget {
             WhiteGreenButton(
                 text: "Done",
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => MainScreen()),
                   );
